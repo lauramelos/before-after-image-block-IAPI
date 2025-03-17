@@ -142,7 +142,11 @@ __webpack_require__.r(__webpack_exports__);
   /**
    * @see ./edit.js
    */
-  edit: _edit__WEBPACK_IMPORTED_MODULE_3__["default"]
+  edit: _edit__WEBPACK_IMPORTED_MODULE_3__["default"],
+  /**
+   * @see ./save.js
+   */
+  save
 });
 
 /***/ }),
