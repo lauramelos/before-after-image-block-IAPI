@@ -4,25 +4,11 @@
 import { store, getContext } from '@wordpress/interactivity';
 
 const { state } = store( 'create-block', {
-	state: {
-		get themeText() {
-			return state.isDark ? state.darkText : state.lightText;
-		},
-	},
 	actions: {
-		toggleOpen() {
+		changePosition( e ) {
 			const context = getContext();
-			context.isOpen = ! context.isOpen;
+			context.sliderPosition = `${e.target.value}%`;
 		},
-		toggleTheme() {
-			state.isDark = ! state.isDark;
-		},
-	},
-	callbacks: {
-		logIsOpen: () => {
-			const { isOpen } = getContext();
-			// Log the value of `isOpen` each time it changes.
-			console.log( `Is open: ${ isOpen }` );
-		},
+
 	},
 } );

@@ -9,48 +9,34 @@
  *
  * @see https://github.com/WordPress/gutenberg/blob/trunk/docs/reference-guides/block-api/block-metadata.md#render
  */
-
-// Generates a unique id for aria-controls.
-$unique_id = wp_unique_id( 'p-' );
-
-// Adds the global state.
-wp_interactivity_state(
-	'create-block',
-	array(
-		'isDark'    => false,
-		'darkText'  => esc_html__( 'Switch to Light', 'beforeafterimagesi' ),
-		'lightText' => esc_html__( 'Switch to Dark', 'beforeafterimagesi' ),
-		'themeText'	=> esc_html__( 'Switch to Dark', 'beforeafterimagesi' ),
-	)
-);
 ?>
 
 <div
-	<?php echo get_block_wrapper_attributes(); ?>
-	data-wp-interactive="create-block"
-	<?php echo wp_interactivity_data_wp_context( array( 'isOpen' => false ) ); ?>
-	data-wp-watch="callbacks.logIsOpen"
-	data-wp-class--dark-theme="state.isDark"
->
-	<button
-		data-wp-on--click="actions.toggleTheme"
-		data-wp-text="state.themeText"
-	></button>
-
-	<button
-		data-wp-on--click="actions.toggleOpen"
-		data-wp-bind--aria-expanded="context.isOpen"
-		aria-controls="<?php echo esc_attr( $unique_id ); ?>"
-	>
-		<?php esc_html_e( 'Toggle', 'beforeafterimagesi' ); ?>
-	</button>
-
-	<p
-		id="<?php echo esc_attr( $unique_id ); ?>"
-		data-wp-bind--hidden="!context.isOpen"
-	>
-		<?php
-			esc_html_e( 'Before After Images I - hello from an interactive block!', 'beforeafterimagesi' );
-		?>
-	</p>
+    <?php echo get_block_wrapper_attributes(); ?>
+    data-wp-interactive="create-block"
+    <?php echo wp_interactivity_data_wp_context( array( "sliderPosition" =>"50%" ) ); ?>
+	class="wp-block-create-block-beforeafterimagesi" >
+    <div class="container" data-wp-style----position="context.sliderPosition">
+        <div class="image-container">
+			<?php 
+				foreach ( $block->parsed_block['innerBlocks'] as $picture ) {
+					echo $picture['innerHTML'];
+				}
+			?>
+        </div>
+        <input type="range" min="0" max="100" value="50"
+            aria-label="Percentage of before photo shown"
+            class="slider" data-wp-on--input="actions.changePosition" />
+        <div class="slider-line" aria-hidden="true"></div>
+        <div class="slider-button" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 256 256">
+                <rect width="256" height="256" fill="none"></rect>
+                <line x1="128" y1="40" x2="128" y2="216"   fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" ></line>
+                <line x1="96" y1="128" x2="16" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" ></line>
+                <polyline points="48 160 16 128 48 96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" ></polyline>
+                <line x1="160" y1="128" x2="240" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" ></line>
+                <polyline points="208 96 240 128 208 160" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16" ></polyline>
+            </svg>
+        </div>
+    </div>
 </div>

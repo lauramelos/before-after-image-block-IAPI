@@ -65,27 +65,10 @@ __webpack_require__.r(__webpack_exports__);
 const {
   state
 } = (0,_wordpress_interactivity__WEBPACK_IMPORTED_MODULE_0__.store)('create-block', {
-  state: {
-    get themeText() {
-      return state.isDark ? state.darkText : state.lightText;
-    }
-  },
   actions: {
-    toggleOpen() {
+    changePosition(e) {
       const context = (0,_wordpress_interactivity__WEBPACK_IMPORTED_MODULE_0__.getContext)();
-      context.isOpen = !context.isOpen;
-    },
-    toggleTheme() {
-      state.isDark = !state.isDark;
-    }
-  },
-  callbacks: {
-    logIsOpen: () => {
-      const {
-        isOpen
-      } = (0,_wordpress_interactivity__WEBPACK_IMPORTED_MODULE_0__.getContext)();
-      // Log the value of `isOpen` each time it changes.
-      console.log(`Is open: ${isOpen}`);
+      context.sliderPosition = `${e.target.value}%`;
     }
   }
 });
