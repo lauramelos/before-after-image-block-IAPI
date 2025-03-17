@@ -11,7 +11,9 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
+import Slider from './slider';
+import './editor.scss';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -27,13 +29,21 @@ import { useBlockProps } from '@wordpress/block-editor';
  */
 export default function Edit( { attributes, setAttributes } ) {
 	const blockProps = useBlockProps();
+	const innerBlocksProps = useInnerBlocksProps( blockProps, {
+		allowedBlocks: [ 'core/image' ],
+		template: [
+			[ 'core/image' ],
+			[ 'core/image' ],
+		],
+		templateLock: 'all',
+	} );
 
 	return (
-		<p { ...blockProps }>
-			{ __(
-				'Before After Images I – hello from the editor!',
-				'beforeafterimagesi'
-			) }
-		</p>
+		<div { ...blockProps }>
+			<div className="container" >
+				<div {...innerBlocksProps} className="image-container"></div>
+				<Slider />
+			</div>
+		</div>
 	);
 }

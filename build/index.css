@@ -6,11 +6,36 @@
  *
  * Replace them with your own styles or remove the file completely.
  */
-.wp-block-create-block-beforeafterimagesi input[type=text] {
-  font-size: 1em;
-  color: inherit;
-  background: inherit;
-  border: 0;
+.wp-block-create-block-beforeafterimagesi {
+  display: block;
+  min-height: auto;
+}
+.wp-block-create-block-beforeafterimagesi .container {
+  display: block;
+  position: static;
+  overflow: hidden;
+  border-radius: 0;
+  --position: 0;
+  width: 100%;
+}
+.wp-block-create-block-beforeafterimagesi .container .image-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 100%;
+  max-height: 100%;
+  aspect-ratio: auto;
+}
+.wp-block-create-block-beforeafterimagesi .container .image-container figure {
+  display: block;
+}
+.wp-block-create-block-beforeafterimagesi .container .image-container figure:first-child {
+  position: relative;
+  inset: 0;
+  width: 100%;
+}
+.wp-block-create-block-beforeafterimagesi .slider-button,
+.wp-block-create-block-beforeafterimagesi .slider-line {
+  left: 50%;
 }
 
 /*# sourceMappingURL=index.css.map*/
